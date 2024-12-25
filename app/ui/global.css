@@ -17,6 +17,112 @@ input[type='number']::-webkit-outer-spin-button {
     margin: 0;
 }
 
-/*body {*/
-/*  background-color: gray;*/
-/*}*/
+@layer components {
+    table {
+        @apply hidden min-w-full text-gray-900 md:table
+    }
+
+    tbody {
+        @apply bg-white
+    }
+
+    .table-wrapper {
+        @apply rounded-lg bg-gray-50 p-2 md:pt-0
+    }
+
+    .mobile-table-card {
+        @apply mb-2 w-full rounded-md bg-white p-4
+    }
+
+    .info-text {
+        @apply text-gray-500
+    }
+
+    input {
+        @apply block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500
+    }
+
+    .input-icon {
+        @apply absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500
+    }
+
+    tr {
+        @apply w-full border-b  py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg
+    }
+
+    .pagination-number {
+        @apply flex h-10 w-10 items-center justify-center text-sm border
+    }
+
+    .pagination-number-hover {
+        @apply hover:bg-gray-100
+    }
+
+    .active-pagination-number {
+        @apply z-10 bg-blue-600 border-blue-600 text-white
+    }
+
+    .disabled-pagination-arrow {
+        @apply pointer-events-none text-gray-300
+    }
+
+    .dark .pagination-number {
+        @apply bg-gray-800 border-gray-600 text-gray-100
+    }
+
+    .dark .pagination-number-hover {
+        @apply hover:bg-gray-700
+    }
+
+    .dark .active-pagination-number {
+        @apply bg-gray-800 border-gray-300 text-gray-100
+    }
+
+    .dark .disabled-pagination-arrow {
+        @apply text-gray-700
+    }
+
+    .dark tr {
+        @apply border-gray-700
+    }
+
+    .dark .input-icon {
+        @apply text-gray-300
+    }
+
+    .dark input {
+        @apply bg-gray-800 text-gray-100 border-gray-600
+    }
+
+    .dark .info-text {
+        @apply text-gray-300
+    }
+
+    .dark .mobile-table-card {
+        @apply bg-gray-800
+    }
+
+    .dark p {
+        @apply text-gray-100
+    }
+
+    .dark .table-wrapper {
+        @apply bg-gray-800
+    }
+
+    .dark tbody {
+        @apply bg-gray-900;
+    }
+
+    .dark table {
+        @apply text-gray-100;
+    }
+
+    .dark body {
+        @apply bg-gray-900;
+    }
+
+    .dark h1 {
+        @apply text-gray-100;
+    }
+}
