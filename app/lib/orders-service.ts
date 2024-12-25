@@ -42,6 +42,17 @@ export const fetchOrdersPages = async ({ itemName, currencyItemName }: {
   return Math.ceil(filteredOrders.length / ITEMS_PER_PAGE);
 }
 
+export const fetchMapInfo = async (): Promise<MapInfo> => {
+  const baseUrl = process.env.NODE_ENV === 'development'
+    ? 'http://127.0.0.1:3000' : ''
+  const response = await fetch(`${baseUrl}/api/map`, {
+    next: { revalidate: 3600 }, // Revalidate every 60 minutes
+  });
+
+  const data = await response.json();
+  return data;
+}
+
 export type RustOrder = {
   id: string;
   quantity: number;
@@ -54,4 +65,10 @@ export type RustOrder = {
     y: number;
   };
   marker_name: string;
+}
+
+export type MapInfo = {
+  width: number;
+  height: number;
+  margin: number;
 }

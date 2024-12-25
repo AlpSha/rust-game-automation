@@ -24,6 +24,21 @@ def load_items():
         return json.load(file)
 
 
+async def fetch_map_info():
+    server_details = ServerDetails(server_ip, server_port, steam_id, player_token)
+    socket = RustSocket(server_details)
+    await socket.connect()
+
+    map_info = await socket.get_map_info()
+
+    await socket.disconnect()
+    return {
+        'width': map_info.width,
+        'height': map_info.height,
+        'margin': map_info.margin,
+    }
+
+
 # Asynchronous function to fetch orders from the server
 async def fetch_orders():
     items = load_items()
@@ -61,6 +76,12 @@ async def fetch_orders():
 def get_orders():
     orders = asyncio.run(fetch_orders())
     return jsonify(orders)
+
+
+@app.route('/api/map', methods=['GET'])
+def get_map_info():
+    map_info = asyncio.run(fetch_map_info())
+    return jsonify(map_info)
 
 
 if __name__ == '__main__':
