@@ -31,31 +31,34 @@ export default function OrdersTableClient({ orders, mapInfo }: { orders: RustOrd
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
+                      <p className="info-text">Buy Item</p>
+                    </div>
+                    <div className="flex items-center">
                       <p>{order.item_name} x {order.quantity}</p>
                     </div>
                   </div>
                   <div>
-                    <div className="mb-2 flex items-center">
-                      <p className="info-text">Buy Item</p>
+                    <div>
+                      <div className="mb-2 flex items-center">
+                        <p className="info-text">Cost</p>
+                      </div>
+                      <div className="flex items-center">
+                        <p>{order.currency_item_name} x {order.cost_per_item}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="flex w-full items-center justify-between pt-4">
-                  <div>
-                    <div className="mb-2 flex items-center">
-                      <p>{order.currency_item_name} x {order.cost_per_item}</p>
-                    </div>
+                <div className="flex items-center justify-between mt-2">
+                  <div className="flex items-center">
+                    <p>
+                      Grid: {getGridName(order.coordinates.x, order.coordinates.y, mapInfo)}
+                    </p>
                   </div>
-                  <div>
-                    <div className="mb-2 flex items-center">
-                      <p className="info-text">Cost</p>
-                    </div>
+                  <div className="flex items-center">
+                    <p>
+                      Stock: {order.amount_in_stock}
+                    </p>
                   </div>
-                </div>
-                <div className="justify-self-end">
-                  <p>
-                    Stock: {order.amount_in_stock}
-                  </p>
                 </div>
               </div>
             ))}
@@ -68,6 +71,7 @@ export default function OrdersTableClient({ orders, mapInfo }: { orders: RustOrd
               <th scope="col" className="px-3 py-5 font-medium">Pay With</th>
               <th scope="col" className="px-3 py-5 font-medium">Cost</th>
               <th scope="col" className="px-3 py-5 font-medium">Stock</th>
+              <th scope="col" className="px-3 py-5 font-medium">Grid</th>
             </tr>
             </thead>
             <tbody>
@@ -88,6 +92,9 @@ export default function OrdersTableClient({ orders, mapInfo }: { orders: RustOrd
                 <td className="whitespace-nowrap px-3 py-3">
                   <p>{order.amount_in_stock}</p>
                 </td>
+                <td className="whitespace-nowrap px-3 py-3">
+                  <p>{getGridName(order.coordinates.x, order.coordinates.y, mapInfo)}</p>
+                </td>
               </tr>
             ))}
             </tbody>
@@ -98,7 +105,7 @@ export default function OrdersTableClient({ orders, mapInfo }: { orders: RustOrd
 
       {/* Popup */}
       {isPopupOpen && selectedOrder && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20">
           <div className="popup-container">
             <h2 className="text-lg font-bold mb-4">Order Details</h2>
             <p><strong>Item:</strong> {selectedOrder.item_name}</p>

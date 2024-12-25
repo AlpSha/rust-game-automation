@@ -59,7 +59,7 @@ input[type='number']::-webkit-outer-spin-button {
     }
 
     .active-pagination-number {
-        @apply bg-blue-600 border-blue-600 text-white
+        @apply z-10 bg-blue-600 border-blue-600 text-white
     }
 
     .disabled-pagination-arrow {
