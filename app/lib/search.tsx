@@ -44,7 +44,7 @@ export default function Search({ placeholder, name }: { placeholder: string, nam
              onChange={(e) => handleSearch(e.target.value)}
              onFocus={handleFocus}
              onAbort={() => setIconClass(isDarkMode ? 'text-gray-300' : 'text-gray-500')}
-             defaultValue={searchParams.get('query')?.toString()}
+             defaultValue={searchParams.get(name)?.toString()}
       />
       <MagnifyingGlassIcon
         className={`input-icon ${iconClass}`}/>
