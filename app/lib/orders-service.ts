@@ -1,6 +1,4 @@
 export const fetchOrders = async (): Promise<RustOrder[]> => {
-  const baseUrl = process.env.NODE_ENV === 'development'
-    ? 'http://127.0.0.1:3000' : ''
   const response = await fetch(`${baseUrl}/api/orders`, {
     next: { revalidate: 900 }, // Revalidate every 15 minutes
   });
@@ -8,6 +6,10 @@ export const fetchOrders = async (): Promise<RustOrder[]> => {
   const data = await response.json();
   return data;
 }
+
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://127.0.0.1:5000'
+  : 'https://rust-automation-da0d39f97102.herokuapp.com/'
 
 const ITEMS_PER_PAGE = 10;
 
@@ -43,8 +45,6 @@ export const fetchOrdersPages = async ({ itemName, currencyItemName }: {
 }
 
 export const fetchMapInfo = async (): Promise<MapInfo> => {
-  const baseUrl = process.env.NODE_ENV === 'development'
-    ? 'http://127.0.0.1:3000' : ''
   const response = await fetch(`${baseUrl}/api/map`, {
     next: { revalidate: 3600 }, // Revalidate every 60 minutes
   });
